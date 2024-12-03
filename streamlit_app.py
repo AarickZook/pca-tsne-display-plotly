@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import plotly.express as px
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.impute import SimpleImputer
@@ -103,3 +104,15 @@ csv = tsne_df.to_csv(index=False)
 b64 = base64.b64encode(csv.encode()).decode()
 href = f'<a href="data:file/csv;base64,{b64}" download="tsne_output.csv">Download t-SNE CSV File with Clusters</a>'
 st.markdown(href, unsafe_allow_html=True)
+
+fig = px.scatter(
+    tsne_df,
+    x='tsne_dimension_1',
+    y='tsne_dimension_2',
+    color='Cluster',
+    hover_data=['Headlines'],  # Include 'Headlines' for hover information
+    title='2D t-SNE Visualization with Clustering'
+)
+
+# Display the figure in Streamlit
+st.plotly_chart(fig)
