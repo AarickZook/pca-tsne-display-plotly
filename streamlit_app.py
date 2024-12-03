@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import logging
 import matplotlib.pyplot as plt
 import plotly.express as px
 from sklearn.decomposition import PCA
@@ -8,6 +9,8 @@ from sklearn.manifold import TSNE
 from sklearn.impute import SimpleImputer
 from sklearn.cluster import KMeans
 import base64
+
+print(st.logger._loggers)
 
 # Set the title of the app
 st.title('PCA and t-SNE Visualization with Coloring')
