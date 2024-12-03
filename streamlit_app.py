@@ -57,6 +57,8 @@ if not set(required_columns).issubset(df.columns):
 # Extract features and limit the number of samples
 x = df.loc[0:num_samples - 1, required_columns].values
 
+headlines = df.loc[0:num_samples - 1, 'Headlines'].values
+
 # Impute missing values
 imputer = SimpleImputer(strategy='mean')
 x = imputer.fit_transform(x)
@@ -101,6 +103,7 @@ tsne_df = pd.DataFrame(
     data_2d, columns=['tsne_dimension_1', 'tsne_dimension_2']
 )
 tsne_df['Cluster'] = labels
+tsne_df['Headlines'] = headlines
 
 # Download link for the t-SNE output
 csv = tsne_df.to_csv(index=False)
@@ -113,7 +116,7 @@ fig = px.scatter(
     x='tsne_dimension_1',
     y='tsne_dimension_2',
     color='Cluster',
-    hover_data=['Headlines'],  # Include 'Headlines' for hover information
+    hover_data='Headlines',  # Include 'Headlines' for hover information
     title='2D t-SNE Visualization with Clustering'
 )
 
