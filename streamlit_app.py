@@ -113,8 +113,18 @@ fig = px.scatter(
     x='tsne_dimension_1',
     y='tsne_dimension_2',
     color='Cluster',
-    hover_data='Headlines',  # Include 'Headlines' for hover information
+    hover_data=['Headlines'],  # Include 'Headlines' for hover information
     title='2D t-SNE Visualization with Clustering'
+)
+
+# Customize axis labels, title, and colorbar
+fig.update_layout(
+    xaxis_title='t-SNE Dimension 1',
+    yaxis_title='t-SNE Dimension 2',
+    title_font_size=20,
+    coloraxis_colorbar=dict(
+        title='Cluster Label'
+    )
 )
 
 # Display the figure in Streamlit
